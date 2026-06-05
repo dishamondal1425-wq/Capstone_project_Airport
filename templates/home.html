@@ -1,0 +1,503 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="text-center mt-5">
+
+    <h1 class="fw-bold">
+        Welcome to Air Notify
+    </h1>
+
+    <p class="lead">
+        AI-powered airport management
+        system with multilingual
+        announcements, food ordering,
+        ticket booking and flight tracking.
+    </p>
+
+</div>
+
+
+<!-- Feature Cards -->
+
+<div class="row mt-5 home-dashboard">
+
+    <div class="col-md-3">
+
+        <div class="card shadow">
+
+            <div class="card-body text-center">
+
+                <h3>🎤</h3>
+
+                <h4>Announcement AI</h4>
+
+                <p>
+                    Translate airport
+                    announcements into
+                    multiple languages.
+                </p>
+
+                <a href="/announcement"
+                   class="btn btn-primary">
+
+                    Open
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-3">
+
+        <div class="card shadow">
+
+            <div class="card-body text-center">
+
+                <h3>🛫</h3>
+
+                <h4>Flight Status</h4>
+
+                <p>
+                    Search flight
+                    timings and status.
+                </p>
+
+                <a href="/flight-status"
+                   class="btn btn-success">
+
+                    Open
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-3">
+
+        <div class="card shadow">
+
+            <div class="card-body text-center">
+
+                <h3>🍔</h3>
+
+                <h4>Food Order</h4>
+
+                <p>
+                    Order airport food
+                    online easily.
+                </p>
+
+                <a href="/food-order"
+                   class="btn btn-warning">
+
+                    Open
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-3">
+
+        <div class="card shadow">
+
+            <div class="card-body text-center">
+
+                <h3>🎫</h3>
+
+                <h4>Ticket Booking</h4>
+
+                <p>
+                    Book airport
+                    tickets online.
+                </p>
+
+                <a href="/ticket-booking"
+                   class="btn btn-danger">
+
+                    Open
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Modern Airport Dashboard -->
+
+<div class="modern-dashboard mt-5">
+
+    <div class="row">
+
+        <!-- Left Big Section -->
+
+        <div class="col-md-8 mb-4">
+
+            <div class="airport-panel">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <div>
+
+                        <h2 class="text-white fw-bold">
+                            ✈ Airport Live Updates
+                        </h2>
+
+                        <p class="text-light mb-0">
+                            Real-time airport flight information
+                        </p>
+
+                    </div>
+
+                    <button class="btn btn-light rounded-pill px-4">
+                        Explore
+                    </button>
+
+                </div>
+
+
+                <!-- Flight Updates -->
+
+                <div class="flight-status-box">
+
+                    <div class="flight-item">
+
+                        <div>
+                            <strong>AI 202</strong>
+                            <p class="mb-0 text-light">
+                                Kolkata → Delhi
+                            </p>
+                        </div>
+
+                        <div class="status on-time">
+                            On Time
+                        </div>
+
+                    </div>
+
+
+                    <div class="flight-item">
+
+                        <div>
+                            <strong>6E 455</strong>
+                            <p class="mb-0 text-light">
+                                Kolkata → Mumbai
+                            </p>
+                        </div>
+
+                        <div class="status delayed">
+                            Delayed
+                        </div>
+
+                    </div>
+
+
+                    <div class="flight-item">
+
+                        <div>
+                            <strong>UK 901</strong>
+                            <p class="mb-0 text-light">
+                                Kolkata → Bangalore
+                            </p>
+                        </div>
+
+                        <div class="status boarding">
+                            Boarding
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Right Side Small Panels -->
+
+        <div class="col-md-4">
+
+            <div class="small-panel mb-3">
+
+                <h5>🌤 Weather</h5>
+
+                  <h2>
+                      {{ temperature }}°C
+                  </h2>
+
+                <p>
+                    {{ weather }}
+                </p>
+
+               <small>
+                   Kolkata Airport
+                </small>
+
+            </div>
+
+
+            <div class="small-panel mb-3">
+
+                <h5>🕒 Airport Time</h5>
+
+                <h2 id="live-clock">
+                    Loading...
+                </h2>
+
+                <small>
+                    India Standard Time
+                </small>
+
+            </div>
+
+
+            <div class="small-panel">
+
+                <h5>🔔 Passenger Alerts</h5>
+
+                <ul>
+                    <li>Arrive 2 hours early</li>
+                    <li>Carry ID proof</li>
+                    <li>Security may take time</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================================== -->
+<!-- CHATBOT INTERFACE WIDGET -->
+<!-- ========================================== -->
+
+<!-- Chatbot Floating Toggle Button -->
+<div id="chatbot-toggle" onclick="toggleChatbot()">
+    💬
+</div>
+
+<!-- Chatbot Window Widget -->
+<div id="chatbot-box" class="hidden">
+    <div id="chatbot-header">
+        <span>✈ Airport Assistant</span>
+        <button onclick="toggleChatbot()" style="background:none; border:none; color:white; cursor:pointer; font-size:16px;">✕</button>
+    </div>
+    <div id="chatbot-messages">
+        <div class="message bot-message">👋 Hello! I am your Airport Assistant. How can I help you today?</div>
+    </div>
+    <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Ask about flights, gates, status..." onkeypress="handleKeyPress(event)">
+        <button id="chatbot-send-btn" onclick="sendChatbotMessage()">Send</button>
+    </div>
+</div>
+
+<!-- Chatbot CSS Styling -->
+<style>
+    #chatbot-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #007bff;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        z-index: 1050;
+        transition: transform 0.2s;
+    }
+    #chatbot-toggle:hover {
+        transform: scale(1.1);
+    }
+    #chatbot-box {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 350px;
+        height: 450px;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 1050;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    #chatbot-box.hidden {
+        display: none;
+    }
+    #chatbot-header {
+        background-color: #1a2b4c;
+        color: white;
+        padding: 15px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #chatbot-messages {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background-color: #f8f9fa;
+    }
+    .message {
+        padding: 10px 14px;
+        border-radius: 8px;
+        max-width: 85%;
+        font-size: 14px;
+        white-space: pre-line;
+        line-height: 1.4;
+    }
+    .user-message {
+        background-color: #007bff;
+        color: white;
+        align-self: flex-end;
+    }
+    .bot-message {
+        background-color: #e9ecef;
+        color: #333;
+        align-self: flex-start;
+    }
+    #chatbot-input-container {
+        display: flex;
+        border-top: 1px solid #dee2e6;
+        padding: 10px;
+        background-color: white;
+    }
+    #chatbot-input {
+        flex: 1;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        padding: 8px 12px;
+        outline: none;
+    }
+    #chatbot-send-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        margin-left: 8px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    #chatbot-send-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<!-- Main Page Clock Scripts and Chatbot Logical Events -->
+<script>
+
+function updateClock() {
+
+    const now = new Date();
+
+    const options = {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true
+    };
+
+    const time = now.toLocaleTimeString(
+        'en-IN',
+        options
+    );
+
+    document.getElementById(
+        'live-clock'
+    ).innerHTML = time;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
+/* Chatbot UI Toggle Controller */
+function toggleChatbot() {
+    const chatBox = document.getElementById('chatbot-box');
+    chatBox.classList.toggle('hidden');
+}
+
+/* Trap Enter Key inside Chat Input */
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendChatbotMessage();
+    }
+}
+
+/* Chat Processing Engine */
+function sendChatbotMessage() {
+    const inputField = document.getElementById('chatbot-input');
+    const messageText = inputField.value.trim();
+    
+    if (!messageText) return;
+
+    const messagesContainer = document.getElementById('chatbot-messages');
+    
+    // Append user query text visually
+    const userDiv = document.createElement('div');
+    userDiv.className = 'message user-message';
+    userDiv.textContent = messageText;
+    messagesContainer.appendChild(userDiv);
+    
+    inputField.value = '';
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // Compile virtual form submission matching Python route requirements
+    const formData = new FormData();
+    formData.append('question', messageText);
+
+    fetch('/chatbot', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Render server reply content cleanly
+        const botDiv = document.createElement('div');
+        botDiv.className = 'message bot-message';
+        botDiv.textContent = data.answer;
+        messagesContainer.appendChild(botDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'message bot-message';
+        errorDiv.textContent = '⚠️ Connection error. Please verify application server status.';
+        messagesContainer.appendChild(errorDiv);
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,201 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<style>
+.food-img {
+    height: 220px;
+    width: 100%;
+    object-fit: contain;
+    background: #fff;
+    padding: 10px;
+    /* Add this line to blend out the grid background */
+    mix-blend-mode: multiply; 
+}
+
+.restaurant-img{
+    height:260px;
+    width:100%;
+    object-fit:contain;
+    background:#f8f9fa;
+    border-radius:15px;
+    padding:10px;
+}
+
+.food-card{
+    transition:0.3s;
+}
+
+.food-card:hover{
+    transform:scale(1.03);
+}
+</style>
+
+<div class="container mt-5">
+
+    <h1 class="text-center mb-5">
+        🍴 Airport Food Court
+    </h1>
+
+    <div class="row">
+
+        <div class="col-lg-8">
+
+            {% for restaurant, data in menu.items() %}
+
+            <div class="card shadow-lg mb-5 p-4 border-0 rounded-4">
+
+                <img
+                    src="{{ url_for('static', filename=data.image) }}"
+                    class="restaurant-img mb-4"
+                >
+
+                <h2 class="text-center mb-4">
+                    {{ restaurant }}
+                </h2>
+
+                <div class="row">
+
+                  {% for item in data["items"] %}
+
+                    <div class="col-md-4 mb-4">
+
+                        <div class="card shadow food-card h-100 border-0">
+
+                            <img
+                                src="{{ url_for('static', filename=item.image) }}"
+                                class="card-img-top food-img"
+                            >
+
+                            <div class="card-body text-center">
+
+                                <h5>
+                                    {{ item.name }}
+                                </h5>
+
+                                <h6 class="text-success">
+                                    ₹ {{ item.price }}
+                                </h6>
+
+                                <form
+                                    method="POST"
+                                    action="/add-food"
+                                >
+
+                                    <input
+                                        type="hidden"
+                                        name="restaurant"
+                                        value="{{ restaurant }}"
+                                    >
+
+                                    <input
+                                        type="hidden"
+                                        name="food_name"
+                                        value="{{ item.name }}"
+                                    >
+
+                                    <input
+                                        type="hidden"
+                                        name="price"
+                                        value="{{ item.price }}"
+                                    >
+
+                                    <input
+                                        type="number"
+                                        name="quantity"
+                                        value="1"
+                                        min="1"
+                                        class="form-control mb-2"
+                                    >
+
+                                    <button
+                                        class="btn btn-success w-100"
+                                    >
+                                        Add to Cart
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="col-lg-4">
+
+            <div class="card shadow-lg p-4 rounded-4 sticky-top">
+
+                <h3 class="text-center mb-4">
+                    🛒 Your Cart
+                </h3>
+
+                {% if orders %}
+
+                    {% for order in orders %}
+
+                    <div
+                        class="border rounded p-3 mb-3"
+                    >
+
+                        <h5>
+                            {{ order[2] }}
+                        </h5>
+
+                        <p class="mb-1">
+                            Quantity:
+                            {{ order[3] }}
+                        </p>
+
+                        <p class="text-success fw-bold">
+                            ₹ {{ order[5] }}
+                        </p>
+
+                    </div>
+
+                    {% endfor %}
+
+                    <hr>
+
+                    <h4 class="text-center">
+                        Total:
+                        ₹ {{ total_bill }}
+                    </h4>
+
+                    <a
+                        href="/place-order"
+                        class="btn btn-success w-100 mt-3"
+                    >
+                        Place Order
+                    </a>
+
+                {% else %}
+
+                    <div
+                        class="alert alert-warning"
+                    >
+                        Cart is empty
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

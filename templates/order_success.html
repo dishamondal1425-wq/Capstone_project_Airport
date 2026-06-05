@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow p-5 text-center">
+
+        <h1 class="text-success">
+
+            ✅ Order Placed Successfully!
+
+        </h1>
+
+        <p class="mt-3">
+
+            Your food order has been confirmed.
+
+        </p>
+
+        <h4>
+
+            Please collect food from
+            Airport Food Court
+
+        </h4>
+
+        <div class="mt-4">
+
+            <a href="/food-order"
+               class="btn btn-primary me-3">
+
+                Order More
+
+            </a>
+
+            <a href="/home"
+               class="btn btn-success">
+
+                Done
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+venv/
+env/
+*.pkl
+*.csv
+*.wav
+*.mp3
+*.mp4
+uploads/
+static/uploads/
+database/
+ffmpeg*
+*.zip
+.DS_Store

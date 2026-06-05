@@ -1,0 +1,25 @@
+version: "3.1"
+
+intents:
+
+* greet
+* goodbye
+* flight_status
+* flight_time
+* gate_info
+* flights_to_city
+
+responses:
+
+utter_greet:
+- text: "Hello! I am your Airport Assistant."
+
+utter_goodbye:
+- text: "Have a safe flight!"
+
+actions:
+
+* action_flight_status
+* action_flight_time
+* action_gate_info
+* action_flights_to_city

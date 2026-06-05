@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow p-5">
+
+        <h1 class="mb-4">
+
+            ✈ Confirm Ticket
+
+        </h1>
+
+        <h4>
+
+            Flight:
+            {{ flight.flight_no }}
+
+        </h4>
+
+        <h5>
+
+            {{ flight.source }}
+            →
+            {{ flight.destination }}
+
+        </h5>
+
+        <h5>
+
+            Time:
+            {{ flight.time }}
+
+        </h5>
+
+        <h5>
+
+            Gate:
+            {{ flight.gate }}
+
+        </h5>
+
+        <h5>
+
+            Price:
+            ₹ {{ flight.price }}
+
+        </h5>
+
+        <hr>
+
+        <form
+            method="POST"
+            action="/confirm-ticket">
+
+            <input
+                type="hidden"
+                name="flight_number"
+                value="{{ flight.flight_no }}">
+
+            <input
+                type="hidden"
+                name="source"
+                value="{{ flight.source }}">
+
+            <input
+                type="hidden"
+                name="destination"
+                value="{{ flight.destination }}">
+
+            <div class="mb-3">
+
+                <label>
+                    Passenger Name
+                </label>
+
+                <input
+                    type="text"
+                    name="passenger_name"
+                    class="form-control"
+                    required>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>
+                    Travel Date
+                </label>
+
+                <input
+                    type="date"
+                    name="travel_date"
+                    class="form-control"
+                    required>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>
+                    Seat Type
+                </label>
+
+                <select
+                    name="seat_type"
+                    class="form-control">
+
+                    <option>
+                        Economy
+                    </option>
+
+                    <option>
+                        Business
+                    </option>
+
+                    <option>
+                        First Class
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button
+                class="btn btn-primary w-100">
+
+                Confirm Booking
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

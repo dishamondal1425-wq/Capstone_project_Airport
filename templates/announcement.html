@@ -1,0 +1,196 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg p-5 rounded-4 border-0">
+
+        <h1 class="text-center mb-4">
+
+            🎤 Airport Announcement System
+
+        </h1>
+
+
+        <!-- SPEAK BUTTON -->
+
+        <div class="text-center">
+
+            <form
+                action="/speak"
+                method="POST">
+
+                <button
+                    class="btn btn-primary btn-lg px-5">
+
+                    🎤 Speak Announcement
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- AUDIO UPLOAD -->
+
+        <hr class="my-5">
+
+        <h3 class="text-center">
+
+            OR Upload Airport Audio
+
+        </h3>
+
+        <form
+            action="/upload-audio"
+            method="POST"
+            enctype="multipart/form-data"
+            class="mt-4">
+
+            <input
+                type="file"
+                name="audio_file"
+                class="form-control"
+                accept=".wav,.mp3,.mp4,.mpeg,.m4a"
+                required>
+
+            <div class="text-center">
+
+                <button
+                    class="btn btn-success btn-lg mt-3">
+
+                    📂 Upload & Analyze
+
+                </button>
+
+            </div>
+
+        </form>
+
+
+        <!-- ERROR -->
+
+        {% if error %}
+
+        <div class="alert alert-danger mt-4">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- RESULT -->
+
+        {% if original_text %}
+
+        <hr class="my-5">
+
+        <h3>
+
+            Recognized Announcement
+
+        </h3>
+
+        <div class="card p-3 bg-light">
+
+            {{ original_text }}
+
+        </div>
+
+
+        <!-- LANGUAGE TRANSLATION -->
+
+        <form
+            action="/translate"
+            method="POST"
+            class="mt-4">
+
+            <label class="fw-bold">
+
+                Translate To:
+
+            </label>
+
+            <select
+                name="language"
+                class="form-control mt-2">
+
+                <option>English</option>
+                <option>Hindi</option>
+                <option>Bengali</option>
+                <option>Tamil</option>
+                <option>Telugu</option>
+                <option>Marathi</option>
+                <option>Malayalam</option>
+                <option>Gujarati</option>
+                <option>Punjabi</option>
+                <option>Mizo</option>
+
+            </select>
+
+            <button
+                class="btn btn-warning mt-3">
+
+                Translate
+
+            </button>
+
+        </form>
+
+
+        <!-- TRANSLATED OUTPUT -->
+
+        {% if translated_text %}
+
+        <div class="mt-4">
+
+            <h3>
+
+                Translated Announcement
+
+            </h3>
+
+            <div class="card p-3 bg-info text-dark">
+
+                {{ translated_text }}
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- CATEGORY -->
+
+        {% if category %}
+
+        <div class="mt-4">
+
+            <h3>
+
+                Announcement Category
+
+            </h3>
+
+            <div class="card p-3 bg-success text-white">
+
+                {{ category }}
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chatbot Widget</title>
+
+<style>
+/* =======================
+   FLOATING BUTTON ONLY
+======================= */
+#chatbot-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: #007bff;
+    color: white;
+    font-size: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    z-index: 999999;
+}
+
+/* =======================
+   CHAT BOX (HIDDEN FIRST)
+======================= */
+#chatbot-box {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 320px;
+    height: 420px;
+    background: white;
+    border-radius: 12px;
+    display: none; /* IMPORTANT */
+    flex-direction: column;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    z-index: 999999;
+    overflow: hidden;
+}
+
+/* HEADER */
+#chat-header {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* CHAT BODY */
+#chat-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+/* INPUT */
+#chat-form {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+#chat-form input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+#chat-form button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* MESSAGE STYLE */
+.user {
+    text-align: right;
+    margin: 5px 0;
+}
+
+.bot {
+    text-align: left;
+    margin: 5px 0;
+    color: #007bff;
+}
+</style>
+</head>
+
+<body>
+
+<!-- FLOATING BUTTON ONLY -->
+<div id="chatbot-button" onclick="toggleChat()">
+    🤖
+</div>
+
+<!-- CHAT BOX -->
+<div id="chatbot-box">
+
+    <div id="chat-header">
+        <span>Airport Assistant</span>
+        <button onclick="toggleChat()" style="background:none;border:none;color:white;font-size:18px;">✖</button>
+    </div>
+
+    <div id="chat-body">
+        {% for msg in messages %}
+            <div class="{{ msg.sender }}">
+                <b>{{ msg.sender }}:</b> {{ msg.text }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <form method="POST" action="/chatbot" id="chat-form">
+        <input type="text" name="question" placeholder="Ask something..." required>
+        <button type="submit">Send</button>
+    </form>
+
+</div>
+
+<script>
+function toggleChat() {
+    const box = document.getElementById("chatbot-box");
+
+    if (box.style.display === "flex") {
+        box.style.display = "none";
+    } else {
+        box.style.display = "flex";
+    }
+}
+</script>
+
+</body>
+</html>

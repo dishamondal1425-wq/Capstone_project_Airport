@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <!-- ✈ TITLE -->
+    <div class="text-center mb-4">
+        <h1>✈ Flight Status Board</h1>
+    </div>
+
+    <!-- 🟦 LIVE DASHBOARD -->
+    <div class="row text-center mb-4">
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                ✈ Total Flights
+                <h3>{{ total }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-3 text-success">
+                🟢 On Time
+                <h3>{{ on_time }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-3 text-warning">
+                🟡 Delayed
+                <h3>{{ delayed }}</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 🔍 TIME SEARCH ONLY -->
+    <div class="card shadow p-4 mb-4">
+
+        <form method="POST">
+
+            <div class="row justify-content-center">
+
+                <div class="col-md-4">
+                    <input type="time" name="time" class="form-control" required>
+                </div>
+
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100">
+                        Search Flights
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- 📊 FLIGHT TABLE -->
+    <div class="card shadow p-4">
+
+        <h2 class="text-center mb-4">Flight Results</h2>
+
+        <table class="table table-striped table-hover">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Flight No</th>
+                    <th>Destination</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Gate</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% if flights %}
+
+                    {% for flight in flights %}
+
+                    <tr
+                        {% if flight.status == "Delayed" %}
+                            class="table-warning"
+                        {% else %}
+                            class="table-success"
+                        {% endif %}
+                    >
+
+                        <td>{{ flight.flight_no }}</td>
+                        <td>{{ flight.destination }}</td>
+                        <td>{{ flight.time }}</td>
+
+                        <td>
+                            {% if flight.status == "Delayed" %}
+                                🟡 Delayed
+                            {% else %}
+                                🟢 On Time
+                            {% endif %}
+                        </td>
+
+                        <td>{{ flight.gate }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">
+                            Please select a time and search flights
+                        </td>
+                    </tr>
+
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- 🔄 AUTO REFRESH EVERY 10 SEC -->
+<script>
+setInterval(() => {
+    location.reload();
+}, 10000);
+</script>
+
+{% endblock %}

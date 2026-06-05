@@ -1,0 +1,151 @@
+.airport-board{
+    background:#003366;
+    padding:40px;
+    border-radius:20px;
+}
+
+.airport-display{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+}
+
+.info-box{
+    background:#f4f4f4;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+.category-box{
+    background:#0d6efd;
+    color:white;
+    text-align:center;
+    padding:30px;
+    border-radius:20px;
+}
+
+button{
+    border-radius:12px !important;
+}
+
+/* Home page cards only */
+.home-dashboard .card {
+    height: 100%;
+    min-height: 300px; /* same size for all cards */
+}
+
+.home-dashboard .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.home-dashboard .card {
+    transition: transform 0.3s ease;
+}
+
+.home-dashboard .card:hover {
+    transform: translateY(-5px);
+}
+
+/* Airport Dashboard */
+.airport-dashboard{
+    margin-top:60px;
+}
+
+.flight-board{
+    background:#081b33;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+
+.flight-board table{
+    margin-bottom:0;
+}
+
+.info-card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.info-card h2{
+    font-weight:bold;
+}
+
+.info-card ul{
+    padding-left:20px;
+    margin-bottom:0;
+}
+
+/* Modern Dashboard */
+
+.modern-dashboard{
+    margin-top:60px;
+}
+
+.airport-panel{
+    background: linear-gradient(
+        135deg,
+        #081b33,
+        #0f2d52
+    );
+
+    border-radius:30px;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.flight-status-box{
+    margin-top:20px;
+}
+
+.flight-item{
+    background:rgba(255,255,255,0.08);
+    padding:18px 20px;
+    border-radius:18px;
+    margin-bottom:15px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    color:white;
+}
+
+.small-panel{
+    background:white;
+    padding:25px;
+    border-radius:25px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+.status{
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.on-time{
+    background:#198754;
+    color:white;
+}
+
+.delayed{
+    background:#ffc107;
+    color:black;
+}
+
+.boarding{
+    background:#0dcaf0;
+    color:white;
+}
+
+.small-panel ul{
+    padding-left:18px;
+    margin-bottom:0;
+}

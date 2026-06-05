@@ -1,0 +1,242 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg p-5 border-0 rounded-4">
+
+        <h1 class="text-center mb-4">
+            ✈ Flight Booking
+        </h1>
+
+        <form action="/search-flights"
+              method="POST">
+
+            <div class="row">
+
+                <!-- FROM -->
+
+                <div class="col-md-3">
+
+                    <label>
+                        Flying From
+                    </label>
+
+                    <select
+                        name="source"
+                        class="form-control"
+                        required>
+
+                        <option value="">
+                            Select City
+                        </option>
+
+                        <option>Kolkata</option>
+                        <option>Delhi</option>
+                        <option>Mumbai</option>
+                        <option>Chennai</option>
+                        <option>Bangalore</option>
+                        <option>Hyderabad</option>
+                        <option>Pune</option>
+                        <option>Ahmedabad</option>
+                        <option>Goa</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- TO -->
+
+                <div class="col-md-3">
+
+                    <label>
+                        Going To
+                    </label>
+
+                    <select
+                        name="destination"
+                        class="form-control"
+                        required>
+
+                        <option value="">
+                            Select City
+                        </option>
+
+                        <option>Kolkata</option>
+                        <option>Delhi</option>
+                        <option>Mumbai</option>
+                        <option>Chennai</option>
+                        <option>Bangalore</option>
+                        <option>Hyderabad</option>
+                        <option>Pune</option>
+                        <option>Ahmedabad</option>
+                        <option>Goa</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DATE -->
+
+                <div class="col-md-2">
+
+                    <label>
+                        Departure Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="travel_date"
+                        class="form-control"
+                        required>
+
+                </div>
+
+
+                <!-- PASSENGERS -->
+
+                <div class="col-md-2">
+
+                    <label>
+                        Passengers
+                    </label>
+
+                    <select
+                        name="passengers"
+                        class="form-control">
+
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- CLASS -->
+
+                <div class="col-md-2">
+
+                    <label>
+                        Class
+                    </label>
+
+                    <select
+                        name="seat_type"
+                        class="form-control">
+
+                        <option>Economy</option>
+                        <option>Business</option>
+                        <option>First Class</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <button
+                class="btn btn-primary w-100 mt-4">
+
+                🔍 Search Flights
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- SEARCH RESULTS -->
+
+    {% if flights %}
+
+    <div class="mt-5">
+
+        <h2>
+            Available Flights
+        </h2>
+
+        {% for flight in flights %}
+
+        <div class="card shadow p-4 mt-3">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-2">
+
+                    <h4>
+                        {{ flight.flight_no }}
+                    </h4>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <strong>
+                        {{ flight.source }}
+                    </strong>
+
+                    →
+
+                    <strong>
+                        {{ flight.destination }}
+                    </strong>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    {{ flight.time }}
+
+                </div>
+
+                <div class="col-md-2">
+
+                    {{ flight.status }}
+
+                </div>
+
+                <div class="col-md-2">
+
+                    Gate:
+                    {{ flight.gate }}
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <strong>
+
+                        ₹ {{ flight.price }}
+
+                    </strong>
+
+                    <br>
+
+                    <a href="/book-flight/{{ flight.flight_no }}"
+                       class="btn btn-success mt-2">
+
+                        Book Now
+
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

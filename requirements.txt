@@ -1,0 +1,10 @@
+flask
+pandas
+gunicorn
+mysql-connector-python
+deep-translator
+requests
+speechrecognition
+pydub
+joblib
+reportlab
